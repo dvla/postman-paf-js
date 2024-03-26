@@ -72,6 +72,21 @@ const addAllPresentOrganisationElements = (addressElements, structuredAddress) =
 };
 
 /**
+ * Add all present organisation elements (organisation name, department name and PO Box number) and
+ * building names elements (building name and sub building name) to the address elements array.
+ *
+ * @param {*} addressElements {string[]} The array of address elements to append the organisation elements to
+ * @param {*} structuredAddress {{}} The structured address being converted
+ */
+const addAllPresentOrganisationElementsAndBuildingNames = (addressElements, structuredAddress) => {
+    addPresentAddressElement(addressElements, structuredAddress.organisationName);
+    addPresentAddressElement(addressElements, structuredAddress.departmentName);
+    addPresentAddressElement(addressElements, structuredAddress.buildingName);
+    addPresentAddressElement(addressElements, structuredAddress.subBuildingName);
+    addPresentAddressElement(addressElements, formatPoBoxNumber(structuredAddress.poBoxNumber));
+};
+
+/**
  * Add all present thoroughfare and locality elements (thoroughfare name, dependent thoroughfare name, dependent
  * locality and double dependent locality) to the address elements array.
  *
@@ -103,12 +118,16 @@ const addAllPresentThoroughfareAndLocalityElements = (addressElements, structure
  * @returns {{}} Mapped unstructured address
  */
 const mapAddressElementsToUnstructuredAddress = (addressElements, postTown, postcode) => {
-    if (addressElements.length < 1) {
-        throw new Error('Cannot convert an address without at least 1 element other than postTown and postcode.');
-    }
-    if (!postTown || !postcode) {
-        throw new Error('Cannot convert an address without a postTown or postcode.');
-    }
+    // Errors removed from module to replicate behaviour of the postman-paf-java module
+    // Code commented out as the errors might be used in a future iteration
+    // of the library
+
+    // if (addressElements.length < 1) {
+    //     throw new Error('Cannot convert an address without at least 1 element other than postTown and postcode.');
+    // }
+    // if (!postTown || !postcode) {
+    //     throw new Error('Cannot convert an address without a postTown or postcode.');
+    // }
 
     const convertedUnstructuredAddress = {};
 
@@ -252,6 +271,7 @@ module.exports = {
     addPresentAddressElement,
     addThoroughfareAndLocalityElementsWithPremisesPrefix,
     addAllPresentOrganisationElements,
+    addAllPresentOrganisationElementsAndBuildingNames,
     addAllPresentThoroughfareAndLocalityElements,
     mapAddressElementsToUnstructuredAddress,
     isExceptionRuleIndicator,

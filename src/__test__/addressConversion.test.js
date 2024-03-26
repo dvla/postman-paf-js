@@ -149,21 +149,86 @@ describe('convertStructuredToUnstructured', () => {
         });
     });
 
-    it('throws error when unable to apply rules', () => {
+    it('converts structuredAddress when no rules apply thoroughfareName', () => {
+        // Given
+        const structuredAddress = {
+            thoroughfareName: structuredAddressTemplate.thoroughfareName,
+            ...postTownAndPostcode,
+        };
+
+        // When
+        const convertedUnstructuredAddress = convertStructuredToUnstructured(structuredAddress);
+
+        // Then
+        expect(convertedUnstructuredAddress).toEqual({
+            line1: structuredAddress.thoroughfareName,
+            ...line5AndPostcode,
+        });
+    });
+
+    it('converts structuredAddress when no rules apply dependant thoroughfareName', () => {
+        // Given
+        const structuredAddress = {
+            dependentThoroughfareName: structuredAddressTemplate.dependentThoroughfareName,
+            ...postTownAndPostcode,
+        };
+
+        // When
+        const convertedUnstructuredAddress = convertStructuredToUnstructured(structuredAddress);
+
+        // Then
+        expect(convertedUnstructuredAddress).toEqual({
+            line1: structuredAddress.dependentThoroughfareName,
+            ...line5AndPostcode,
+        });
+    });
+
+    it('converts structuredAddress when no rules apply dependant doubleDependentLocality', () => {
+        // Given
+        const structuredAddress = {
+            doubleDependentLocality: structuredAddressTemplate.doubleDependentLocality,
+            ...postTownAndPostcode,
+        };
+
+        // When
+        const convertedUnstructuredAddress = convertStructuredToUnstructured(structuredAddress);
+
+        // Then
+        expect(convertedUnstructuredAddress).toEqual({
+            line1: structuredAddress.doubleDependentLocality,
+            ...line5AndPostcode,
+        });
+    });
+
+    it('converts structuredAddress when no rules apply dependant dependentLocality', () => {
+        // Given
+        const structuredAddress = {
+            dependentLocality: structuredAddressTemplate.dependentLocality,
+            ...postTownAndPostcode,
+        };
+
+        // When
+        const convertedUnstructuredAddress = convertStructuredToUnstructured(structuredAddress);
+
+        // Then
+        expect(convertedUnstructuredAddress).toEqual({
+            line1: structuredAddress.dependentLocality,
+            ...line5AndPostcode,
+        });
+    });
+
+    it('returns posttown and postcode correctly when only postcode and postTown supplied', () => {
         // Given
         const structuredAddress = {
             ...postTownAndPostcode,
         };
 
         // When
-        let error;
-        try {
-            convertStructuredToUnstructured(structuredAddress);
-        } catch (err) {
-            error = err;
-        }
+        const convertedUnstructuredAddress = convertStructuredToUnstructured(structuredAddress);
 
         // Then
-        expect(error.message).toEqual('Structured address did not match any of the conversion rules');
+        expect(convertedUnstructuredAddress).toEqual({
+            ...line5AndPostcode,
+        });
     });
 });

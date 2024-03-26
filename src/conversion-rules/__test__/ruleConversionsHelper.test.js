@@ -233,62 +233,6 @@ describe('mapAddressElementsToUnstructuredAddress', () => {
         // Then
         expect(mappedUnstructuredAddress).toEqual(testAddressMapping);
     });
-
-    it('throws an error if addressElements is an empty array', () => {
-        // Given
-        const addressElements = [];
-        let error;
-
-        // When
-        try {
-            mapAddressElementsToUnstructuredAddress(
-                addressElements,
-                testAddressToMap.postTown,
-                testAddressToMap.postcode
-            );
-        } catch (err) {
-            error = err;
-        }
-
-        // Then
-        expect(error.message).toEqual(
-            'Cannot convert an address without at least 1 element other than postTown and postcode.'
-        );
-    });
-
-    it('throws an error if postTown is null', () => {
-        // Given
-        const addressElements = testAddressToMap.elements;
-        const postTown = null;
-        let error;
-
-        // When
-        try {
-            mapAddressElementsToUnstructuredAddress(addressElements, postTown, testAddressToMap.postcode);
-        } catch (err) {
-            error = err;
-        }
-
-        // Then
-        expect(error.message).toEqual('Cannot convert an address without a postTown or postcode.');
-    });
-
-    it('throws an error if postcode is null', () => {
-        // Given
-        const addressElements = testAddressToMap.elements;
-        const postcode = null;
-        let error;
-
-        // When
-        try {
-            mapAddressElementsToUnstructuredAddress(addressElements, testAddressToMap.postTown, postcode);
-        } catch (err) {
-            error = err;
-        }
-
-        // Then
-        expect(error.message).toEqual('Cannot convert an address without a postTown or postcode.');
-    });
 });
 
 describe('isExceptionRuleIndicator', () => {

@@ -13,6 +13,31 @@ const structuredAddressTemplate = {
     postcode: 'AC1 2DC',
 };
 
+const structuredAddressNoPostcodeOrPosttownTemplate = {
+    organisationName: 'BUSY BUSINESS',
+    departmentName: 'DEPARTMENT OF DEFENCE AGAINST FAILED TESTS',
+    poBoxNumber: '12345',
+    buildingName: 'BOB',
+    buildingNumber: '1',
+    subBuildingName: 'FLAT 1',
+    thoroughfareName: 'DRIVE-THROUGH THOROUGHFARE',
+    dependentThoroughfareName: '"IT DEPENDS..." ROAD',
+    dependentLocality: 'NOWHERE',
+    doubleDependentLocality: 'TWICE NOWHERE IS STILL NOWHERE...',
+    postTown: '',
+    postcode: '',
+};
+
+const structuredAddressBuildingNumberAndPoBoxNumberAreNumbersTemplate = {
+    poBoxNumber: 12345,
+    buildingNumber: 5,
+    thoroughfareName: 'DRIVE-THROUGH THOROUGHFARE',
+    dependentLocality: 'NOWHERE',
+    doubleDependentLocality: 'TWICE NOWHERE IS STILL NOWHERE...',
+    postTown: 'A TOWN FULL OF MAIL',
+    postcode: 'AC1 2DC',
+};
+
 const internationalAddressTemplate = {
     line1: 'El Quinto Pino line1',
     line2: 'El Quinto Pino line2',
@@ -59,6 +84,8 @@ const numericPartExceptionElements = {
 
 module.exports = {
     structuredAddressTemplate,
+    structuredAddressNoPostcodeOrPosttownTemplate,
+    structuredAddressBuildingNumberAndPoBoxNumberAreNumbersTemplate,
     internationalAddressTemplate,
     bfpoAddressTemplate,
     postTownAndPostcode,

@@ -6,6 +6,7 @@ const {
     convertRule5StructuredToUnstructured,
     convertRule6StructuredToUnstructured,
     convertRule7StructuredToUnstructured,
+    convertNoRuleApplicableStructuredToUnstructured,
 } = require('../ruleConversions');
 const {
     structuredAddressTemplate,
@@ -1135,6 +1136,45 @@ describe('convertRule7StructuredToUnstructured', () => {
         expect(convertedUnstructuredAddress).toEqual({
             line1: `A ${structuredAddressTemplate.buildingName}`,
             line2: `${structuredAddressTemplate.buildingNumber} ${structuredAddressTemplate.thoroughfareName}`,
+            ...line5AndPostcode,
+        });
+    });
+
+    it('add address elements to line 1 and 2 when building number present', () => {
+        // Given
+        const structuredAddress = {
+            departmentName: structuredAddressTemplate.departmentName,
+            buildingNumber: structuredAddressTemplate.buildingNumber,
+            ...postTownAndPostcode,
+        };
+
+        // When
+        const convertedUnstructuredAddress = convertNoRuleApplicableStructuredToUnstructured(structuredAddress);
+
+        // Then
+        expect(convertedUnstructuredAddress).toEqual({
+            line1: structuredAddressTemplate.departmentName,
+            line2: structuredAddressTemplate.buildingNumber,
+            ...line5AndPostcode,
+        });
+    });
+
+    it('add address elements to line 1 and 2 when building number not present', () => {
+        // Given
+        const structuredAddress = {
+            departmentName: structuredAddressTemplate.departmentName,
+            thoroughfareName: structuredAddressTemplate.thoroughfareName,
+
+            ...postTownAndPostcode,
+        };
+
+        // When
+        const convertedUnstructuredAddress = convertNoRuleApplicableStructuredToUnstructured(structuredAddress);
+
+        // Then
+        expect(convertedUnstructuredAddress).toEqual({
+            line1: structuredAddressTemplate.departmentName,
+            line2: structuredAddressTemplate.thoroughfareName,
             ...line5AndPostcode,
         });
     });

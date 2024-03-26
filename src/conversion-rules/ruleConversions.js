@@ -2,6 +2,7 @@ const {
     addPresentAddressElement,
     mapAddressElementsToUnstructuredAddress,
     addThoroughfareAndLocalityElementsWithPremisesPrefix,
+    addAllPresentOrganisationElementsAndBuildingNames,
     isExceptionRuleIndicator,
     isBuildingNameNumericPartException,
     getNamePartOfBuildingName,
@@ -245,6 +246,30 @@ const convertRule7StructuredToUnstructured = (structuredAddress) => {
     );
 };
 
+/**
+ * Convert a structured address to an unstructured address when none of the 7 rules apply
+ *
+ * @param structuredAddress {{}} The structured address to be converted
+ * @returns {{}} The converted unstructured address
+ */
+const convertNoRuleApplicableStructuredToUnstructured = (structuredAddress) => {
+    const addressElements = [];
+
+    addAllPresentOrganisationElementsAndBuildingNames(addressElements, structuredAddress);
+
+    if (structuredAddress.buildingNumber) {
+        addPresentAddressElement(addressElements, structuredAddress.buildingNumber);
+    } else {
+        addAllPresentThoroughfareAndLocalityElements(addressElements, structuredAddress);
+    }
+
+    return mapAddressElementsToUnstructuredAddress(
+        addressElements,
+        structuredAddress.postTown,
+        structuredAddress.postcode
+    );
+};
+
 module.exports = {
     convertRule1StructuredToUnstructured,
     convertRule2StructuredToUnstructured,
@@ -253,4 +278,5 @@ module.exports = {
     convertRule5StructuredToUnstructured,
     convertRule6StructuredToUnstructured,
     convertRule7StructuredToUnstructured,
+    convertNoRuleApplicableStructuredToUnstructured,
 };

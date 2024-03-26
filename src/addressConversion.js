@@ -7,6 +7,7 @@ const {
     convertRule5StructuredToUnstructured,
     convertRule6StructuredToUnstructured,
     convertRule7StructuredToUnstructured,
+    convertNoRuleApplicableStructuredToUnstructured,
 } = require('./conversion-rules/ruleConversions');
 
 /**
@@ -41,7 +42,7 @@ const convertStructuredToUnstructured = (structuredAddress) => {
         return convertRule7StructuredToUnstructured(structuredAddress);
     }
 
-    throw new Error('Structured address did not match any of the conversion rules');
+    return convertNoRuleApplicableStructuredToUnstructured(structuredAddress);
 };
 
 module.exports = {
