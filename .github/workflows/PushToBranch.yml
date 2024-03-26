@@ -5,7 +5,7 @@ run-name: ${{github.actor}} Pushed To ${{github.ref_name}}
 on: [push]
 
 jobs:
-  prepare:
+  BuildAndTest:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -24,20 +24,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-  audit:
-    runs-on: ubuntu-latest
-    needs: prepare
-    steps:
-      - run: npm run audit --audit-level=moderate
+      - name: Audit
+        run: npm run audit --audit-level=moderate
 
-  lint:
-    runs-on: ubuntu-latest
-    needs: prepare
-    steps:
-      - run: npm run lint
+      - name: Lint
+        run: npm run lint
 
-  test:
-    runs-on: ubuntu-latest
-    needs: prepare
-    steps:
-      - run: npm run test
+      - name: Test
+        run: npm run test
