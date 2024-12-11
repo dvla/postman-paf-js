@@ -2,17 +2,15 @@ name: Push To Main Branch
 
 run-name: ${{github.actor}} Pushed To ${{github.ref_name}}
 
-on:
-  push:
-    branches:
-      - "main"
+on: [push]
+
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [16, 18, 20]
 
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Audit
         run: npm run audit --audit-level=moderate
@@ -37,9 +35,6 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
 
     steps:
 
@@ -50,6 +45,6 @@ jobs:
         with:
           node-version: 18
 
-      - name: Publish to npm
-        run: npm publish
-        # auth token placeholder
+      # - run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.npm_token}}
