@@ -1,0 +1,28 @@
+name: Node.js Test
+
+on:
+
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18]
+
+    steps:
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Audit
+        run: npm run audit --audit-level=moderate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
