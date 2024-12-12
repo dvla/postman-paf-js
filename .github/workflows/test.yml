@@ -1,8 +1,8 @@
 name: Node.js Test
 
-on:
+on: [push]
 
-  pull_request:
+  # pull_request:
 
 jobs:
   test:

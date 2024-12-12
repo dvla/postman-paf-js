@@ -2,8 +2,7 @@ name: Push To Main Branch
 
 run-name: ${{github.actor}} Pushed To ${{github.ref_name}}
 
-on:
-  pull_request:
+on: [push]
 
 
 jobs:
@@ -36,6 +35,9 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
 
     steps:
 
@@ -45,3 +47,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
+      # - run: npm publish
+      #   env:
+          # NODE_AUTH_TOKEN: 
