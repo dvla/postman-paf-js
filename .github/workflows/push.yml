@@ -2,11 +2,10 @@ name: Push To Main Branch
 
 run-name: ${{github.actor}} Pushed To ${{github.ref_name}}
 
-on: 
-  schedule:
-    - cron: '0 7 * * 1'
+on: [push]
+  # schedule:
+  #   - cron: '0 7 * * 1'
 
-  # [push]
 
 
 jobs:
@@ -44,7 +43,6 @@ jobs:
       contents: read
 
     steps:
-
       - uses: actions/checkout@v4
 
       - name: Set up Node.js for deployment
@@ -54,4 +52,4 @@ jobs:
 
       # - run: npm publish
       #   env:
-          # NODE_AUTH_TOKEN: 
+      # NODE_AUTH_TOKEN:
