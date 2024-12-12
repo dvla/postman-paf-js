@@ -12,6 +12,7 @@
     "format": "npx prettier --write '**/*.{js,yml}' && eslint . --fix --color",
     "lint": "eslint . --color",
     "prettier": "prettier --check 'src/**/*.js'",
+    "outdated": "ncu --errorLevel 2 --color",
     "test": "jest . --colors  --coverage"
   },
   "pre-commit": [
