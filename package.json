@@ -30,6 +30,7 @@
     "jest": "^29.7.0",
     "npm-audit-resolver": "^3.0.0-RC.0",
     "pre-commit": "^1.0.10",
+    "npm-check-updates": "16.14.18",
     "prettier": "^3.4.2"
   },
   "author": "DVLA AC Squad",
