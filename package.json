@@ -1,6 +1,6 @@
 {
-  "name": "postman-paf-js",
-  "version": "1.0.0",
+  "name": "postman-paf",
+  "version": "1.0.1",
   "description": "Unofficial JavaScript library to apply Royal Mail Rules & Exceptions to PAF (Postcode Address File) addresses when converting to a printable format.",
   "main": "index.js",
   "engines": {
@@ -12,6 +12,7 @@
     "format": "npx prettier --write '**/*.{js,yml}' && eslint . --fix --color",
     "lint": "eslint . --color",
     "prettier": "prettier --check 'src/**/*.js'",
+    "outdated": "ncu --errorLevel 2 --color",
     "test": "jest . --colors  --coverage"
   },
   "pre-commit": [
@@ -21,16 +22,19 @@
     "test"
   ],
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb": "^19.0.4",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.16.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-filenames": "^1.3.2",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-jest": "^28.9.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.13.0",
     "jest": "^29.7.0",
     "npm-audit-resolver": "^3.0.0-RC.0",
+    "npm-check-updates": "17.1.11",
     "pre-commit": "^1.2.2",
-    "prettier": "^3.0.3"
+    "prettier": "^3.4.2"
   },
   "author": "DVLA AC Squad",
   "license": "MIT"
