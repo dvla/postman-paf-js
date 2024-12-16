@@ -2,10 +2,9 @@ name: Push To Main Branch
 
 run-name: ${{github.actor}} Pushed To ${{github.ref_name}}
 
-on: pull_request
-  # [push]
-
-
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
   test:
@@ -37,9 +36,6 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
 
     steps:
       - uses: actions/checkout@v4
