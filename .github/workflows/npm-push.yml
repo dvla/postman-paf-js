@@ -43,6 +43,7 @@ jobs:
       - name: Set up Node.js for deployment
         uses: actions/setup-node@v4
         with:
+          registry-url: 'https://registry.npmjs.org/'
           node-version: 18
 
       - run: npm publish
