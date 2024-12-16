@@ -1,5 +1,5 @@
 {
-  "name": "postman-paf-js",
+  "name": "postman-paf",
   "version": "1.0.1",
   "description": "Unofficial JavaScript library to apply Royal Mail Rules & Exceptions to PAF (Postcode Address File) addresses when converting to a printable format.",
   "main": "index.js",
