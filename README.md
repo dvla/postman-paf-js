@@ -16,7 +16,7 @@ Based Royal Mail rules for formatting a PAF address for printing, outlined from 
 Currently only one function is exported out of the module.
 
 ```javascript
-const { convertStructuredToUnstructured } = require('postman-paf-js');
+const { convertStructuredToUnstructured } = require('postman-paf');
 
 const structuredAddressToConvert = {
     buildingNumber: '1',
